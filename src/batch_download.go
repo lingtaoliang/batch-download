@@ -122,6 +122,9 @@ func downloadToFile(w *sync.WaitGroup, httpClient *http.Client, downloadInfo Dow
   paths := exp.FindAllString(path, -1)
   path = strings.Join(paths, "/")
   if isExist(path) {
+  	if isExist(path + ".bak") {
+  		os.Remove(path + ".bak")
+  	}
     successChannel <- downloadInfo
     return
   }
